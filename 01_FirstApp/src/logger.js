@@ -3,7 +3,7 @@ import EventEmitter from 'events';
 const url = 'http://mylogger.io/log';
 
 class  Logger extends EventEmitter{
-    log (message){
+    log (message) {
         //
         console.log(message);
         this.emit('messageLoaded', {id:1, url:'http://'});
@@ -11,4 +11,3 @@ class  Logger extends EventEmitter{
 }
 
 export default Logger;
-//module.exports.endPoint = url;

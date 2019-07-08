@@ -1,4 +1,6 @@
 import Logger from './logger';
+import StartServer from './http'
+
 import { parse } from 'path';
 import { totalmem, freemem } from 'os';
 import { readdirSync, readdir } from 'fs';
@@ -40,3 +42,8 @@ logger.on('messageLoaded', arg => {
 
 logger.log('raising event');
 
+
+console.log('/////////////   Fifth one  ////////////')
+console.log('/////////////    Server   ////////////')
+
+StartServer();
