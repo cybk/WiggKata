@@ -1,4 +1,4 @@
-const EventEmitter = require('events');
+import EventEmitter from 'events';
 
 const url = 'http://mylogger.io/log';
 
@@ -10,5 +10,5 @@ class  Logger extends EventEmitter{
     }
 }
 
-module.exports = Logger;
+export default Logger;
 //module.exports.endPoint = url;

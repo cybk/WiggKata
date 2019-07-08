@@ -1,29 +1,29 @@
-const Logger = require('./logger');
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
+import Logger from './logger';
+import { parse } from 'path';
+import { totalmem, freemem } from 'os';
+import { readdirSync, readdir } from 'fs';
 
 const logger = new Logger();
 
 console.log('/////////////   First one  ////////////')
 logger.log('Something to log');
 
-let pathObj =  path.parse(__filename);
+let pathObj =  parse(__filename);
 console.log(pathObj);
 
 console.log('/////////////   Second one  ////////////')
-const totalMem =  os.totalmem();
-const freeMem = os.freemem();
+const totalMem =  totalmem();
+const freeMem = freemem();
 
 console.log(`Total Memory: ${totalMem}`);
 console.log(`Free Memory: ${freeMem}`);
 
 console.log('/////////////   Third one  ////////////')
 
-const files = fs.readdirSync(__dirname);
+const files = readdirSync(__dirname);
 console.log('list of files on sync', files);
 
-fs.readdir(__dirname, (err, files) => {
+readdir(__dirname, (err, files) => {
     if (err){
         console.error('Error', err);
     }
