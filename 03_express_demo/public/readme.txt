@@ -1,0 +1,1 @@
+This is just a simple line inside readme txt file

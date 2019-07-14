@@ -1,9 +1,18 @@
 import express from 'express';
 import Joi from 'joi';
 import { join } from 'path';
+import helmet from 'helmet';
+import morgan from 'morgan';
+
+import loggin from './logger';
 
 const app = express();
 app.use(express.json());
+
+app.use(loggin);
+app.use(express.static('public'));
+app.use(helmet());
+app.use(morgan('tiny'));
 
 const courses = [
     {id: 1, name: 'Course1'},
@@ -30,6 +39,7 @@ app.get('/api/courses/:id', (req, res) => {
 
     if (!course || !course.length){
         res.status(404).send('The course with the given ID was not found');
+        return;
     }
 
     res.send(course);
@@ -57,6 +67,7 @@ app.put('/api/courses/:id', (req, res) => {
 
     if (!course || !course.length){
         res.status(404).send('The course with the given ID was not found');
+        return;
     }
 
     let {error} = validateCourse(req.body);
@@ -68,6 +79,22 @@ app.put('/api/courses/:id', (req, res) => {
     course.name = req.body.name;
     res.send(course);
 
+});
+
+app.delete('/api/courses/:id', (req, res) => {
+   
+    const course = courses.filter(elem => elem.id === parseInt(req.params.id));
+
+    if (!course || !course.length){
+        res.status(404).send('The course with the given ID was not found');
+        return;
+    }
+
+    const index = courses.indexOf(course);
+
+    courses.splice(index, 1);
+
+    res.send(courses);
 });
 
 const port = process.env.PORT || 3000;
