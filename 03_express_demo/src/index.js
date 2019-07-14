@@ -9,6 +9,8 @@ import loggin from './logger';
 
 const app = express();
 app.use(express.json());
+app.set('view engine', 'pug');
+app.set('views', './views');
 
 app.use(loggin);
 app.use(express.static('public'));
@@ -35,7 +37,10 @@ const courses = [
 ];
 
 app.get('/', (req, res) => {
-    res.send('Hello World!!');
+    res.render('index', {
+        title: 'My test express app',
+        message: 'Hello World!!!'
+    });
 });
 
 app.get('/api/courses', (req, res) => {
