@@ -1,0 +1,6 @@
+{
+    "name": "My Test Express App - Development",
+    "mail": {
+        "server": "dev-mail-server"
+    }
+}

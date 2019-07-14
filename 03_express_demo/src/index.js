@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { join } from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import config from 'config';
 
 import loggin from './logger';
 
@@ -12,7 +13,18 @@ app.use(express.json());
 app.use(loggin);
 app.use(express.static('public'));
 app.use(helmet());
-app.use(morgan('tiny'));
+
+if (app.get('env') === 'development'){
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled...');
+}
+
+
+// configuration section
+console.log('Application Name: ', config.get('name'));
+console.log('Mail Server:', config.get('mail.server'));
+//console.log('Mail Password:', config.get('mail.password'));
+
 
 const courses = [
     {id: 1, name: 'Course1'},
