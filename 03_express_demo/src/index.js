@@ -4,7 +4,7 @@ import { join } from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import config from 'config';
-
+const startDebugger = require('debug')('app:startup');
 import loggin from './logger';
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(helmet());
 
 if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
-    console.log('Morgan enabled...');
+    startDebugger('Morgan enabled...');
 }
 
 
