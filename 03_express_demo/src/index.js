@@ -38,11 +38,3 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
 
-function validateCourse (course){
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-
-    return  Joi.validate(course, schema);
-}
-
