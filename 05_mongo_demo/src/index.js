@@ -12,5 +12,36 @@ const courseSchema = new mongoose.Schema({
     tags: [String],
     date: {type: Date, default: Date.now},
     isPublished: Boolean
-
 });
+const Course =  mongoose.model('Course', courseSchema);
+
+async function createCourse() {
+   
+    const course = new Course({
+        name: 'Angular Course',
+        author: 'Mosh',
+        tages: ['Angular', 'frontend'],
+        isPublished: true
+    });
+
+    const result  = await course.save();
+    console.log('result', result);
+}
+
+//createCourse();
+
+async function getCourses() {
+    // const courses = await Course.find({ author: 'Mosh', isPublished: true})
+    //const courses = await Course.find({ price: {$gte: 10}}) // things with a price greather than 10
+    // const courses = await Course.find({ price: {$in: [10, 25]}}) // things with a price greather than 10
+     const courses = await Course.find()
+         .or([ {author: 'Mosh'}, {isPublished: true}])
+        .limit(10)
+        .sort({ name:1 })
+        .select({name: 1, tages: 1});
+    console.log('Courses', courses);
+}
+
+getCourses();
+
+ 
