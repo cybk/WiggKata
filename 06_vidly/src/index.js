@@ -1,5 +1,6 @@
 
 import genres from './routes/genres';
+import customers from './routes/customers';
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 import config from 'config';
@@ -13,6 +14,7 @@ mongoose.connect(config.get('mongoUri'), { useNewUrlParser: true, useUnifiedTopo
 
 app.use(json());
 app.use('/api/genres', genres);
+app.use('/api/customers', customers);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
