@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import { Genre, Validate } from '../Models/genre';
 
 const router = Router();
