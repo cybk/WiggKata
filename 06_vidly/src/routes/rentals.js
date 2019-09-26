@@ -6,7 +6,7 @@ import { Movie } from '../Models/movie';
 import { Rental, validate } from '../Models/rental';
 import { fail } from 'assert';
 
-const router = express.router;
+const router = express.Router();
 
 Fawn.init(mongoose);
 

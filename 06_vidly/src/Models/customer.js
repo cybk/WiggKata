@@ -32,4 +32,4 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
   }
 
   exports.Customer = Customer;
-  exports.Validate = validateCustomer;
+  exports.validate = validateCustomer;

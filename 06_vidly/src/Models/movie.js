@@ -1,8 +1,8 @@
 import Joi from 'joi';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import { genreSchema } from './genre';
 
-const Movie = mongoose.Schema('Movie', new mongoose.Schema({
+const Movie = mongoose.model('Movie', new mongoose.Schema({
     title: {
         type: String,
         required: true,
