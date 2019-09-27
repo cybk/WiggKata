@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 import Joi from 'joi';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 
-const User = mongoose.model('User', new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
-      type: String,
-      required: true,
-      minlength: 5,
-      maxlength: 50
-    },
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 50
+      },
     email: {
         type: String,
         required: true,
@@ -21,7 +23,15 @@ const User = mongoose.model('User', new mongoose.Schema({
         minlength: 5,
         maxlength: 1024,
     }
-  }));
+});
+console.log('started')
+userSchema.methods.generateAuthToken = function () {
+    return jwt.sign({ _id: this._id }, config.get('jwtSecret'));
+}
+
+const User = mongoose.model('User', userSchema);
+
+
   
 function validateUser(user) {
     const schema = {

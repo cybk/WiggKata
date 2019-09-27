@@ -3,8 +3,6 @@ import _ from 'lodash';
 import { User } from '../Models/user';
 import bcrypt  from 'bcryptjs';
 import Joi from 'joi';
-import jwt from 'jsonwebtoken';
-import config from 'config';
 
 const router = Router();
 
@@ -22,7 +20,7 @@ router.post('/', async (req, res) => {
     var validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid Email or Password.');
 
-    const token = jwt.sign({ _id: user._id }, config.get('jwtSecret'));
+    const token = user.generateAuthToken();
 
     res.send(token);
   });
