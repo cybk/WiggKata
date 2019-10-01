@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { Genre, Validate } from '../Models/genre';
+import auth from '../Middleware/auth';
 
 const router = Router();
 
@@ -8,7 +9,7 @@ router.get('/',  async (req, res) => {
   res.send(genres);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = Validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 

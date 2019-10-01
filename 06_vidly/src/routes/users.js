@@ -1,12 +1,19 @@
 import { Router } from 'express';
 import _ from 'lodash';
 import { User, Validate } from '../Models/user';
+import auth from '../Middleware/auth';
 import bcrypt  from 'bcryptjs';
 
 const router = Router();
 
 router.get('/',  async (req, res) => {
     res.status(400).send('Users list is pending to implement');
+});
+
+router.get('/me', auth, async(req, res) => {
+    const user = await User.findById(req.user._id).select('-password');
+    res.send(user);
+
 });
 
 router.post('/', async (req, res) => {
