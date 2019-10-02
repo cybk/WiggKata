@@ -9,8 +9,11 @@ import error from './Middleware/error';
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 import config from 'config';
+import winston from 'winston';
+require('express-async-errors');
 
 const app = express();
+winston.add(new winston.transports.File({filename: 'logfile.log'}));
 
 mongoose.connect(config.get('mongoUri'), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Mongodb....'))

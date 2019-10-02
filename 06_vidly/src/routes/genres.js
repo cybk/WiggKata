@@ -6,15 +6,10 @@ import admin from '../Middleware/admin';
 const router = Router();
 
 router.get('/', auth,  async (req, res, next) => {
-  try {
-    const genres = await Genre.find();
-    res.send(genres);  
-  } 
-  catch (error) {
-    next(error);
-  }
+    throw new Error('Could not get the genres');
 
-  
+    const genres = await Genre.find();
+    res.send(genres);   
 });
 
 router.post('/', auth, async (req, res) => {
@@ -30,7 +25,6 @@ router.post('/', auth, async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { error } = Validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
-
 
   const genre = await Genre.findByIdAndUpdate(req.params.id, {name: req.body.name}, {
     new: true
