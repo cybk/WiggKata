@@ -5,6 +5,7 @@ import movies from './routes/movies';
 import rentals from './routes/rentals';
 import users from './routes/users';
 import auth from './routes/auth';
+import error from './Middleware/error';
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 import config from 'config';
@@ -23,6 +24,8 @@ app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+
+app.use(error);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

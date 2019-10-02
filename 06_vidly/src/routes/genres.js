@@ -5,9 +5,16 @@ import admin from '../Middleware/admin';
 
 const router = Router();
 
-router.get('/', auth,  async (req, res) => {
-  const genres = await Genre.find();
-  res.send(genres);
+router.get('/', auth,  async (req, res, next) => {
+  try {
+    const genres = await Genre.find();
+    res.send(genres);  
+  } 
+  catch (error) {
+    next(error);
+  }
+
+  
 });
 
 router.post('/', auth, async (req, res) => {
