@@ -14,7 +14,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "config": "^3.2.2",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.19.2"
   }
 }
